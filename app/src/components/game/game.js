@@ -17,22 +17,26 @@ function Game() {
 
   const [isXTurn, setIsXTurn] = useState(true);
   const [isGameInProgress, setIsGameInProgress] = useState(true);
+  const [result, setResult] = useState(null);
 
   useEffect(() => {
     checkWinner();
+    //checkDraw();
     setIsXTurn(!isXTurn);
   }, [board]);
 
   function makeMove(squareNumber) {
-    const symbol = isXTurn ? "X" : "O";
-    if (board[squareNumber] === null) {
-      setBoard((board) => {
-        return [
-          ...board.slice(0, squareNumber),
-          symbol,
-          ...board.slice(squareNumber + 1),
-        ];
-      });
+    if (isGameInProgress) {
+      const symbol = isXTurn ? "X" : "O";
+      if (board[squareNumber] === null) {
+        setBoard((board) => {
+          return [
+            ...board.slice(0, squareNumber),
+            symbol,
+            ...board.slice(squareNumber + 1),
+          ];
+        });
+      }
     }
   }
 
@@ -65,14 +69,34 @@ function Game() {
       rightDiagonal
     ) {
       setIsGameInProgress(false);
-      console.log(`Game over, winner is ${isXTurn ? "X" : "O"}`);
+      setResult(`Game over, winner is ${isXTurn ? "X" : "O"}`);
+    } else if (!board.includes(null)) {
+      setIsGameInProgress(false);
+      setResult("It's a draw!");
     }
   }
+
+  /*
+  function checkDraw() {
+    if (!board.includes(null) && isGameInProgress) {
+      setIsGameInProgress(false);
+      setResult("It's a draw!");
+    }
+  }
+  */
 
   return (
     <div>
       <Board makeMove={makeMove} board={board} />
-      {isXTurn ? <p>X goes</p> : <p>O goes</p>}
+      {isGameInProgress ? (
+        isXTurn ? (
+          <p>X goes</p>
+        ) : (
+          <p>O goes</p>
+        )
+      ) : (
+        <p>{result}</p>
+      )}
     </div>
   );
 }
