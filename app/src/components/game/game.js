@@ -58,7 +58,12 @@ function Game() {
     );
   }
 
-  return <div>{isXTurn ? <p>X goes</p> : <p>O goes</p>}</div>;
+  return (
+    <div>
+      <Board makeMove={makeMove} board={board} />
+      {isXTurn ? <p>X goes</p> : <p>O goes</p>}
+    </div>
+  );
 }
 
 export default Game;
