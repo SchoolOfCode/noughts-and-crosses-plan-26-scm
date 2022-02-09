@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import Board from "../board/board";
 import { useState } from "react";
+import "./game.css";
 
 function Game() {
   const [board, setBoard] = useState([
@@ -93,7 +94,7 @@ function Game() {
   }
 
   return (
-    <div>
+    <div className="game-container">
       <Board makeMove={makeMove} board={board} />
       {isGameInProgress ? (
         isXTurn ? (
@@ -104,7 +105,9 @@ function Game() {
       ) : (
         <div>
           <p>{result}</p>
-          <button onClick={restartGame}>Play again?</button>
+          <button className="replay-btn" onClick={restartGame}>
+            Play again?
+          </button>
         </div>
       )}
     </div>
