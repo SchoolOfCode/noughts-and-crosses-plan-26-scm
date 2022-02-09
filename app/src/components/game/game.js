@@ -22,7 +22,6 @@ function Game() {
 
   useEffect(() => {
     checkWinner();
-    //checkDraw();
     setIsXTurn(!isXTurn);
   }, [board]);
 
@@ -95,7 +94,11 @@ function Game() {
 
   return (
     <div className="game-container">
-      <Board makeMove={makeMove} board={board} />
+      <Board
+        makeMove={makeMove}
+        board={board}
+        isGameInProgress={isGameInProgress}
+      />
       {isGameInProgress ? (
         isXTurn ? (
           <p>X goes</p>
@@ -104,7 +107,7 @@ function Game() {
         )
       ) : (
         <div>
-          <p>{result}</p>
+          <p className="result">{result}</p>
           <button className="replay-btn" onClick={restartGame}>
             Play again?
           </button>
