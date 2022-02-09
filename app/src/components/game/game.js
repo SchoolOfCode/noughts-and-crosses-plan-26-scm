@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Board from "../board/board";
 import { useState } from "react";
 
@@ -15,16 +15,24 @@ function Game() {
     null,
   ]);
 
-  const [isXTurn, setIsXTurn] = useState(false);
+  const [isXTurn, setIsXTurn] = useState(true);
+  const [isGameInProgress, setIsGameInProgress] = useState(true);
 
-  function makeMove(squareNumber, symbol) {
+  useEffect(() => {
+    checkWinner();
+    setIsXTurn(!isXTurn);
+  }, [board]);
+
+  function makeMove(squareNumber) {
+    const symbol = isXTurn ? "X" : "O";
     if (board[squareNumber] === null) {
-      setBoard([
-        ...board.splice(0, squareNumber),
-        symbol,
-        ...board.splice(squareNumber + 1),
-      ]);
-      setIsXTurn(!isXTurn);
+      setBoard((board) => {
+        return [
+          ...board.slice(0, squareNumber),
+          symbol,
+          ...board.slice(squareNumber + 1),
+        ];
+      });
     }
   }
 
@@ -46,7 +54,7 @@ function Game() {
     const rightDiagonal =
       board[2] !== null && board[2] === board[4] && board[2] === board[6];
 
-    return (
+    if (
       leftColumn ||
       middleColumn ||
       rightColumn ||
@@ -55,7 +63,10 @@ function Game() {
       bottomRow ||
       leftDiagonal ||
       rightDiagonal
-    );
+    ) {
+      setIsGameInProgress(false);
+      console.log(`Game over, winner is ${isXTurn ? "X" : "O"}`);
+    }
   }
 
   return (
