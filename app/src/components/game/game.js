@@ -85,6 +85,13 @@ function Game() {
   }
   */
 
+  function restartGame() {
+    setBoard([null, null, null, null, null, null, null, null, null]);
+    setIsXTurn(!isXTurn);
+    setIsGameInProgress(true);
+    setResult(null);
+  }
+
   return (
     <div>
       <Board makeMove={makeMove} board={board} />
@@ -95,7 +102,10 @@ function Game() {
           <p>O goes</p>
         )
       ) : (
-        <p>{result}</p>
+        <div>
+          <p>{result}</p>
+          <button onClick={restartGame}>Play again?</button>
+        </div>
       )}
     </div>
   );
