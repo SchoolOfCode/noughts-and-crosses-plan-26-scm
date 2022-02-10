@@ -2,6 +2,15 @@
 
 ## Noughts and Crosses
 
+This was a fun return to 'normal' React after a heavy couple of days working with Typescript.  
+The task was pretty self-explanatory; build the game according to the plan given below. It really was a great demonstration of how straightforward things can be to build when you have a good plan in place.
+Immediately below is a screenshot of the app we built. After that is the task as given to us.
+
+### Our app at the end of the afternoon (screenshot)
+
+<!-- ![app screenshot](./Screenshot-Naughts-and-Crosses.png) -->
+<img src="./Screenshot-Naughts-and-Crosses.png" style="max-width: 600px">
+
 ### Remind me about Computational Thinking
 
 - Understand the problem
@@ -38,6 +47,7 @@ Find an [online version for them to play](https://playtictactoe.org/), or just a
 ### Look for patterns in these steps
 
 Player Move:
+
 - Pick a square
   - if the square is not empty, you can't pick it
   - if the square is empty, you can pick it
@@ -57,7 +67,7 @@ Player Move:
 - Draw a 3x3 grid of squares
 - First player is X
 - Player Move:
-- Choose a square  
+- Choose a square
   - if the square is not empty, you can't pick it
   - if the square is empty, you can pick it - put the player symbol in that square
 - Check if someone has won
@@ -73,14 +83,14 @@ State, behaviour, dependencies, show -> State, functions, props, render
 
 Wireframe. View parts. Behaviour parts.
 
-|   |   |   |
-|---|---|---|
-|   |   |   |
-|   |   |   |
+|     |     |     |
+| --- | --- | --- |
+|     |     |     |
+|     |     |     |
 
 `Your turn: X`
 
-___
+---
 
 Goes to these components:
 
